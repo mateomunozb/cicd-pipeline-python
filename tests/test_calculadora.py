@@ -7,6 +7,9 @@ def test_sumar():
     assert sumar(-1, 1) == 0
     assert sumar(0, 0) == 0
 
+def test_sumar_decimales():
+    assert sumar(0.1, 0.2) == pytest.approx(0.3)
+
 def test_restar():
     assert restar(5, 2) == 3
     assert restar(1, -1) == 2
@@ -22,3 +25,9 @@ def test_dividir():
     assert dividir(5, -1) == -5.0
     with pytest.raises(ZeroDivisionError):
         dividir(1, 0)
+
+def test_operaciones_con_dos_negativos():
+    assert sumar(-2, -3) == -5
+    assert restar(-2, -3) == 1
+    assert multiplicar(-2, -3) == 6
+    assert dividir(-6, -3) == 2
