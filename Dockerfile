@@ -10,10 +10,15 @@ COPY requirements.txt .
 
 # Instala solo las dependencias de ejecución (Flask y Gunicorn)
 # Usa --no-cache-dir para reducir el tamaño de la imagen
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --only-binary :all: -r requirements.txt
+
+# Ejecuta la aplicación con un usuario sin privilegios.
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 
 # Copia el código de la aplicación (solo la carpeta app)
-COPY app/ ./app/
+COPY --chown=appuser:appgroup app/ ./app/
+
+USER appuser
 
 # Expón el puerto en el que Gunicorn servirá la aplicación
 # Gunicorn por defecto usa 8000, así que usaremos ese.
