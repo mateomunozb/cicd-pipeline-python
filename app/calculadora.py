@@ -10,7 +10,7 @@ def sumar(a, b):
 
 def restar(a, b):
     """Resta el segundo número del primero."""
-    return a + b  # Error intencional
+    return a - b
 
 
 def multiplicar(a, b):
